@@ -1,5 +1,7 @@
 # Grade Calculator
 
+https://grade-calculator-eta.vercel.app/
+
 A responsive web-based grade calculator designed to help students calculate their grades based on assignments and final exams. The project includes features for adding assignments, calculating final marks, and determining the grades needed to achieve specific goals.
 
 ## Features
