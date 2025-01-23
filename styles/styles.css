@@ -182,3 +182,37 @@ footer a:hover {
     border-top: 2px solid #cccccc; /* Light gray line */
     margin: 20px 0; /* Spacing around the line */
 }
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Adjust container width */
+    .container, .simple-container {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    /* Stack inputs vertically */
+    .course-input {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 15px; /* Reduced gap */
+    }
+
+    .course-input input {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .result .course-input, .simple-calculator .course-input {
+        grid-template-columns: 1fr; /* Single column for final goal */
+    }
+
+    /* Adjust button size */
+    button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Center footer text for mobile */
+    footer {
+        font-size: 12px;
+    }
+}
