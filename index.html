@@ -121,11 +121,15 @@
 
             let message = '';
             if (neededMark <= 0) {
-                message = `You need -${Math.abs(neededMark.toFixed(2))}% on the final. Do you even need to go? 😂`;
+                message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
             } else if (neededMark > 100) {
-                message = `You need ${neededMark.toFixed(2)}% on the final. Is that even possible? 😅`;
+                message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
+            } else if (neededMark > 0 && neededMark < 50) {
+                message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
+            } else if (neededMark >= 75 && neededMark <= 100) {
+                message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
             } else {
-                message = `Great job so far! You need ${neededMark.toFixed(2)}% on the final to achieve your goal. Keep it up! 💪`;
+                message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
             }
 
             document.getElementById('output').textContent = message;
