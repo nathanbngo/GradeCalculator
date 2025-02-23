@@ -1,161 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade Calculator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Grade Calculator</h1>
-        <div id="courses">
-            <h2>Assignments</h2>
-            <div class="course-input">
-                <div>
-                    <label for="title-0">Assignment/Test Name</label>
-                    <input type="text" id="title-0" placeholder="Optional">
-                </div>
-                <div>
-                    <label for="mark-0">Mark</label>
-                    <input type="number" id="mark-0">
-                </div>
-                <div>
-                    <label for="weight-0">Weight</label>
-                    <input type="number" id="weight-0">
-                </div>
-            </div>
+  <div class="container">
+    <h1>Grade Calculator</h1>
+    <div id="courses">
+      <h2>Assignments</h2>
+      <!-- Initial assignment input with added classes -->
+      <div class="course-input">
+        <div>
+          <label for="title-0">Assignment/Test Name</label>
+          <input type="text" id="title-0" placeholder="Optional" />
         </div>
-        <button onclick="addCourse()">Add Course</button>
-        
-        <hr class="divider">
+        <div>
+          <label for="mark-0">Mark</label>
+          <input type="number" id="mark-0" class="mark" />
+        </div>
+        <div>
+          <label for="weight-0">Weight</label>
+          <input type="number" id="weight-0" class="weight" />
+        </div>
+      </div>
+    </div>
+    <button onclick="addCourse()">Add Course</button>
     
-        <div class="result">
-            <h2>Final Goal</h2>
-            <div class="course-input">
-                <div>
-                    <label for="desired-mark">Desired Final Mark</label>
-                    <input type="number" id="desired-mark">
-                </div>
-                <div>
-                    <label for="final-weight">Final Exam Weight</label>
-                    <input type="number" id="final-weight">
-                </div>
-            </div>
-            <button onclick="calculateNeededMark()">Calculate Required Final Mark</button>
-            <p id="output"></p>
+    <hr class="divider" />
+  
+    <div class="result">
+      <h2>Final Goal</h2>
+      <div class="course-input">
+        <div>
+          <label for="desired-mark">Desired Final Mark</label>
+          <input type="number" id="desired-mark" />
         </div>
-    </div>
-
-    <div class="simple-container">
-        <h1>Simple Final Grade Calculator</h1>
-        <div class="course-input">
-            <div>
-                <label for="current-grade">Current Grade</label>
-                <input type="number" id="current-grade">
-            </div>
-            <div>
-                <label for="target-grade">Target Grade</label>
-                <input type="number" id="target-grade">
-            </div>
-            <div>
-                <label for="final-worth">Final Weight (%)</label>
-                <input type="number" id="final-worth">
-            </div>
+        <div>
+          <label for="final-weight">Final Exam Weight</label>
+          <input type="number" id="final-weight" />
         </div>
-        <button onclick="calculateSimpleFinalMark()">Calculate Final Mark</button>
-        <p id="simple-output"></p>
+      </div>
+      <button onclick="calculateNeededMark()">Calculate Required Final Mark</button>
+      <p id="output"></p>
     </div>
+  </div>
 
-    <footer>
-        <p>Created by Nathan Ngo</p>
-    </footer>
+  <div class="simple-container">
+    <h1>Simple Final Grade Calculator</h1>
+    <div class="course-input">
+      <div>
+        <label for="current-grade">Current Grade</label>
+        <input type="number" id="current-grade" />
+      </div>
+      <div>
+        <label for="target-grade">Target Grade</label>
+        <input type="number" id="target-grade" />
+      </div>
+      <div>
+        <label for="final-worth">Final Weight (%)</label>
+        <input type="number" id="final-worth" />
+      </div>
+    </div>
+    <button onclick="calculateSimpleFinalMark()">Calculate Final Mark</button>
+    <p id="simple-output"></p>
+  </div>
 
-    <script>
-        let courseCount = 1;
+  <footer>
+    <p>Created by Nathan Ngo</p>
+  </footer>
 
-        function addCourse() {
-            const coursesDiv = document.getElementById('courses');
-            const courseDiv = document.createElement('div');
-            courseDiv.classList.add('course-input');
-            courseDiv.innerHTML = `
-                <div>
-                    <label for="title-${courseCount}">Assignment/Test Name</label>
-                    <input type="text" id="title-${courseCount}" placeholder="Optional">
-                </div>
-                <div>
-                    <label for="mark-${courseCount}">Mark</label>
-                    <input type="number" id="mark-${courseCount}" class="mark">
-                </div>
-                <div>
-                    <label for="weight-${courseCount}">Weight</label>
-                    <input type="number" id="weight-${courseCount}" class="weight">
-                </div>
-            `;
-            coursesDiv.appendChild(courseDiv);
-            courseCount++;
-        }
+  <script>
+    let courseCount = 1;
 
-        function calculateNeededMark() {
-            const marks = document.querySelectorAll('.mark');
-            const weights = document.querySelectorAll('.weight');
+    function addCourse() {
+      const coursesDiv = document.getElementById('courses');
+      const courseDiv = document.createElement('div');
+      courseDiv.classList.add('course-input');
+      courseDiv.innerHTML = `
+        <div>
+          <label for="title-${courseCount}">Assignment/Test Name</label>
+          <input type="text" id="title-${courseCount}" placeholder="Optional">
+        </div>
+        <div>
+          <label for="mark-${courseCount}">Mark</label>
+          <input type="number" id="mark-${courseCount}" class="mark">
+        </div>
+        <div>
+          <label for="weight-${courseCount}">Weight</label>
+          <input type="number" id="weight-${courseCount}" class="weight">
+        </div>
+      `;
+      coursesDiv.appendChild(courseDiv);
+      courseCount++;
+    }
 
-            let currentWeightedTotal = 0;
-            let totalWeightSoFar = 0;
+    function calculateNeededMark() {
+      const marks = document.querySelectorAll('.mark');
+      const weights = document.querySelectorAll('.weight');
 
-            for (let i = 0; i < courseCount; i++) {
-                const mark = parseFloat(marks[i]?.value) || 0;
-                const weight = parseFloat(weights[i]?.value) || 0;
+      let currentWeightedTotal = 0;
+      let totalWeightSoFar = 0;
 
-                currentWeightedTotal += mark * weight;
-                totalWeightSoFar += weight;
-            }
+      // Loop over all inputs returned by querySelectorAll
+      for (let i = 0; i < marks.length; i++) {
+        const mark = parseFloat(marks[i].value) || 0;
+        const weight = parseFloat(weights[i].value) || 0;
+        currentWeightedTotal += mark * weight;
+        totalWeightSoFar += weight;
+      }
 
-            const desiredMark = parseFloat(document.getElementById('desired-mark').value) || 0;
-            const finalWeight = parseFloat(document.getElementById('final-weight').value) || 0;
+      const desiredMark = parseFloat(document.getElementById('desired-mark').value) || 0;
+      const finalWeight = parseFloat(document.getElementById('final-weight').value) || 0;
 
-            const neededMark = ((desiredMark * (totalWeightSoFar + finalWeight) - currentWeightedTotal) / finalWeight);
+      if (finalWeight === 0) {
+        document.getElementById('output').textContent = 'Final Exam Weight cannot be zero.';
+        return;
+      }
 
-            let message = '';
-            if (neededMark <= 0) {
-                message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
-            } else if (neededMark > 100) {
-                message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
-            } else if (neededMark > 0 && neededMark < 50) {
-                message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
-            } else if (neededMark >= 75 && neededMark <= 100) {
-                message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
-            } else {
-                message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
-            }
+      const neededMark = ((desiredMark * (totalWeightSoFar + finalWeight) - currentWeightedTotal) / finalWeight);
 
-            document.getElementById('output').textContent = message;
-        }
+      let message = '';
+      if (neededMark <= 0) {
+        message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
+      } else if (neededMark > 100) {
+        message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
+      } else if (neededMark > 0 && neededMark < 50) {
+        message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
+      } else if (neededMark >= 75 && neededMark <= 100) {
+        message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
+      } else {
+        message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
+      }
 
-        function calculateSimpleFinalMark() {
-            const currentGrade = parseFloat(document.getElementById('current-grade').value) || 0;
-            const targetGrade = parseFloat(document.getElementById('target-grade').value) || 0;
-            const finalWeight = parseFloat(document.getElementById('final-worth').value) || 0;
+      document.getElementById('output').textContent = message;
+    }
 
-            const neededMark = ((targetGrade - (currentGrade * (1 - (finalWeight / 100)))) / (finalWeight / 100));
+    function calculateSimpleFinalMark() {
+      const currentGrade = parseFloat(document.getElementById('current-grade').value) || 0;
+      const targetGrade = parseFloat(document.getElementById('target-grade').value) || 0;
+      const finalWeight = parseFloat(document.getElementById('final-worth').value) || 0;
 
-            let message = '';
-            if (neededMark <= 0) {
-                message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
-            } else if (neededMark > 100) {
-                message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
-            } else if (neededMark > 0 && neededMark < 50) {
-                message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
-            } else if (neededMark >= 75 && neededMark <= 100) {
-                message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
-            } else {
-                message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
-            }
-            document.getElementById('simple-output').textContent = message;
-        }
-    </script>
+      if (finalWeight === 0) {
+        document.getElementById('simple-output').textContent = 'Final Weight cannot be zero.';
+        return;
+      }
+
+      const neededMark = ((targetGrade - (currentGrade * (1 - (finalWeight / 100)))) / (finalWeight / 100));
+
+      let message = '';
+      if (neededMark <= 0) {
+        message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
+      } else if (neededMark > 100) {
+        message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
+      } else if (neededMark > 0 && neededMark < 50) {
+        message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
+      } else if (neededMark >= 75 && neededMark <= 100) {
+        message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
+      } else {
+        message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
+      }
+      document.getElementById('simple-output').textContent = message;
+    }
+  </script>
 </body>
 </html>
