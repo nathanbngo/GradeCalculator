@@ -14,7 +14,6 @@
     <h1>Grade Calculator</h1>
     <div id="courses">
       <h2>Assignments</h2>
-      <!-- Initial assignment input with added classes -->
       <div class="course-input">
         <div>
           <label for="title-0">Assignment/Test Name</label>
@@ -30,8 +29,9 @@
         </div>
       </div>
     </div>
-    <button onclick="addCourse()">Add Course</button>
-    
+    <button onclick="addCourse()">Add Mark</button>
+    <button onclick="calculateCurrentMark()">Show Current Mark</button>
+    <p id="current-mark-output"></p>
     <hr class="divider" />
   
     <div class="result">
@@ -50,30 +50,6 @@
       <p id="output"></p>
     </div>
   </div>
-
-  <div class="simple-container">
-    <h1>Simple Final Grade Calculator</h1>
-    <div class="course-input">
-      <div>
-        <label for="current-grade">Current Grade</label>
-        <input type="number" id="current-grade" />
-      </div>
-      <div>
-        <label for="target-grade">Target Grade</label>
-        <input type="number" id="target-grade" />
-      </div>
-      <div>
-        <label for="final-worth">Final Weight (%)</label>
-        <input type="number" id="final-worth" />
-      </div>
-    </div>
-    <button onclick="calculateSimpleFinalMark()">Calculate Final Mark</button>
-    <p id="simple-output"></p>
-  </div>
-
-  <footer>
-    <p>Created by Nathan Ngo</p>
-  </footer>
 
   <script>
     let courseCount = 1;
@@ -100,72 +76,22 @@
       courseCount++;
     }
 
-    function calculateNeededMark() {
+    function calculateCurrentMark() {
       const marks = document.querySelectorAll('.mark');
       const weights = document.querySelectorAll('.weight');
 
-      let currentWeightedTotal = 0;
-      let totalWeightSoFar = 0;
+      let totalWeightedMarks = 0;
+      let totalWeight = 0;
 
-      // Loop over all inputs returned by querySelectorAll
       for (let i = 0; i < marks.length; i++) {
-        const mark = parseFloat(marks[i].value) || 0;
-        const weight = parseFloat(weights[i].value) || 0;
-        currentWeightedTotal += mark * weight;
-        totalWeightSoFar += weight;
+          const mark = parseFloat(marks[i].value) || 0;
+          const weight = parseFloat(weights[i].value) || 0;
+          totalWeightedMarks += mark * weight;
+          totalWeight += weight;
       }
 
-      const desiredMark = parseFloat(document.getElementById('desired-mark').value) || 0;
-      const finalWeight = parseFloat(document.getElementById('final-weight').value) || 0;
-
-      if (finalWeight === 0) {
-        document.getElementById('output').textContent = 'Final Exam Weight cannot be zero.';
-        return;
-      }
-
-      const neededMark = ((desiredMark * (totalWeightSoFar + finalWeight) - currentWeightedTotal) / finalWeight);
-
-      let message = '';
-      if (neededMark <= 0) {
-        message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
-      } else if (neededMark > 100) {
-        message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
-      } else if (neededMark > 0 && neededMark < 50) {
-        message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
-      } else if (neededMark >= 75 && neededMark <= 100) {
-        message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
-      } else {
-        message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
-      }
-
-      document.getElementById('output').textContent = message;
-    }
-
-    function calculateSimpleFinalMark() {
-      const currentGrade = parseFloat(document.getElementById('current-grade').value) || 0;
-      const targetGrade = parseFloat(document.getElementById('target-grade').value) || 0;
-      const finalWeight = parseFloat(document.getElementById('final-worth').value) || 0;
-
-      if (finalWeight === 0) {
-        document.getElementById('simple-output').textContent = 'Final Weight cannot be zero.';
-        return;
-      }
-
-      const neededMark = ((targetGrade - (currentGrade * (1 - (finalWeight / 100)))) / (finalWeight / 100));
-
-      let message = '';
-      if (neededMark <= 0) {
-        message = `You need -${Math.abs(neededMark.toFixed(2))}%. Do you even need to show up? 😂`;
-      } else if (neededMark > 100) {
-        message = `You need ${neededMark.toFixed(2)}%. Is that even doable? 😅`;
-      } else if (neededMark > 0 && neededMark < 50) {
-        message = `You need ${neededMark.toFixed(2)}%. Might as well snooze. 😴`;
-      } else if (neededMark >= 75 && neededMark <= 100) {
-        message = `You need ${neededMark.toFixed(2)}%. Keep on studying you got this! 😤`;
-      } else {
-        message = `You need ${neededMark.toFixed(2)}% on the final to hit your target. Stay confident and go for it! 🌟`;
-      }
-      document.getElementById('simple-output').textContent = message;
+      let currentMark = totalWeight > 0 ? (totalWeightedMarks / totalWeight).toFixed(2) : "N/A";
+      document.getElementById('current-mark-output').textContent = `Current Mark: ${currentMark}%`;
     }
   </script>
 </body>
